@@ -18,7 +18,6 @@ function App() {
     }) // phần này đơn giản để gán id cho mỗi phiên kết nối vào page. Mục đích chính là để phân biệt đoạn nào là của mình đang chat.
 
     socketRef.current.on('sendDataServer', dataGot => {
-      console.log('sendDataServer', dataGot)
       setMess(oldMsgs => [dataGot.data, ...oldMsgs])
     }) // mỗi khi có tin nhắn thì mess sẽ được render thêm 
 
@@ -50,9 +49,10 @@ function App() {
         inverted={true}
         data={mess}
         style={styles.containerList}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => {
           return (
-            <View style={[styles.item, {
+            <View key={`item${index}`} style={[styles.item, {
               alignSelf: id == item.id ? 'flex-end' : 'flex-start',
               backgroundColor: id == item.id ? '#3399cc' : '#333',
             }]}>
