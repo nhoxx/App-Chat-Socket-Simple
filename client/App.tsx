@@ -19,7 +19,7 @@ function App() {
 
     socketRef.current.on('sendDataServer', dataGot => {
       console.log('sendDataServer', dataGot)
-      setMess(oldMsgs => [...oldMsgs, dataGot.data])
+      setMess(oldMsgs => [dataGot.data, ...oldMsgs])
     }) // mỗi khi có tin nhắn thì mess sẽ được render thêm 
 
     return () => {
